@@ -37,15 +37,15 @@ $ juicy-gcode SVGFILE -o OUTPUT
 
 Sometimes you want to overwrite some default settings. These are the 
 
-* *--dpi* (default 96 DPI) (the resolution of the SVG file)[https://developer.mozilla.org/en-US/docs/Web/CSS/resolution] that is used to determine the size of the SVG when it does not contain explicit units
+* *--dpi* (default 96 DPI) [the resolution of the SVG file](https://developer.mozilla.org/en-US/docs/Web/CSS/resolution) that is used to determine the size of the SVG when it does not contain explicit units
 * *--resolution* (default is 0.1 mm) the resolution of the generated GCode. Paths smaller than this are replaced by line segments instead of further approximated by biarcs
  
 ```
 $ juicy-gcode SVGFILE --dpi 72 --resolution 0.01 
 ```
 
-Some firmwares (e.g. (Marlin)[https://marlinfw.org/docs/gcode/G005.html]) can handle bezier curves explicitely. In this case
-you can command juicy-gcode not to approximate bezier-curves but emit them directly. 
+Some firmwares (e.g. [Marlin](https://marlinfw.org/docs/gcode/G005.html)) can handle bezier curves directly. In this case
+you can command juicy-gcode not to approximate bezier-curves but emit them unchanged. 
 
 ```
 $ juicy-gcode SVGFILE --generate-bezier
@@ -71,41 +71,14 @@ Another configurable property is the resolution of the SVG image in DPI (dot per
 
 ## Limitations
 
-Missing features:
+SVG features that are not supported:
 
-- text (easy with e.g. [FontyFruity](https://hackage.haskell.org/package/FontyFruity), maybe once, you can convert text to curves easily anyway)
-- filling (moderately difficult)
-- clipping (probably not easy, maybe once)
-- images (not planned)
+- texts
+- filling
+- clipping
+- images
 
 ## Testing and bugs
 
 There is a JavaScript [hanging plotter simulator](https://github.com/domoszlai/hanging-plotter-simulator) mainly developed to test the generated gcode.
 Please file an issue if you run into a problem (or drop me an email to dlacko @ gmail.com).
-
-## Implementation
-
-SVG images are built using the following shapes (all of these are subject of an arbitrary affine transformation):
-
-- lines
-- circles
-- ellipses
-- elliptic arcs with optional x axis rotation
-- quadratic and cubic bezier curves
-
-In contrast G-Code implements only
-
-- lines
-- non-elliptical arcs
-
-That means that only lines, circles and some arcs (non-elliptic ones without rotation) can be translated to G-Code directly. If transformations are also counted, then
-only lines can be translated to G-Code directly as circles are not invariant under affine transformations. Because of this, the converter is implemented in two stages.
-
-### Stage 1
-
-All the SVG drawing operations are translated to a list of MoveTo, LineTo and CubicBezierTo operations as these are invariant under affine transformations.
-Arcs, circles and ellipses can be easily approximated with bezier curves with a small error.
-
-### Stage 2
-
-Cubic bezier curves are approximated with [Biarcs](https://en.wikipedia.org/wiki/Biarc) using the algorithm described in [[1](http://www.itc.ktu.lt/index.php/ITC/article/view/11812)] and explained [here](http://dlacko.org/blog/2016/10/19/approximating-bezier-curves-by-biarcs/).
