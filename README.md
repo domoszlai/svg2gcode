@@ -21,7 +21,7 @@ Alternatively, you can build from source code as follows:
 
 ## Usage
 
-> :warning: **Breaking change**: Since version 0.2.0.1, default DPI is changed to 96 and the option to mirror the Y axis is removed (it is always mirrored now)
+> :warning: **Breaking change**: Since version 0.2.0.1, default DPI is changed to 96 and the option to mirror the Y axis is removed (it is always mirrored now for correct result)
 
 The easier way to use juicy-gcode is to simply provide an SVG file name. The generated GCode will be written to standard output.
 
@@ -75,7 +75,7 @@ gcode
 }
 ```
 
-The flavor file can be provided as follows
+In the case you want to overwrite it, copy this favor to a text file and modify it accordign to your need. Then use juicy-gcode as follows:
 
 ```
 $ juicy-gcode SVGFILE -f FLAVORFILE
@@ -87,7 +87,8 @@ Juicy-gcode was originally developed as a testbed for my hanging plotter project
 it reached maturity and became a really usuable tool. My main idea for further development is to turn it
 into a tool that can drive CNCs in 2.5 dimensions (e.g. carving, engraving) with just one colored SVG file. 
 
-To be able to test and enjoy that software I need a proper CNC. Please consider donating for that.
+To be able to test and enjoy that software, I need a proper CNC. Please consider donating a small amount for that purpose,
+or donate an actual CNC if you have a spare one for whatever reason.
 
 **[Donate for a CNC](https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=UGFZYDQSTF58L&source=https://github.com/domoszlai/juicy-gcode/)**
 
