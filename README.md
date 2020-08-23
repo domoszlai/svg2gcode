@@ -53,7 +53,16 @@ $ juicy-gcode SVGFILE --generate-bezier
 
 ## Configuration
 
-The default G-Code flavor configuration file is the following:
+The generated GCode is highly dependent on the actual device it wil be executed by. In juicy-gcode, these settings are called
+GCode flavour and consists of the following:
+
+- Begin GCode routine (commands that are executed *before* the actual print job)
+- End GCode routine (commands that are executed *after* the actual print job)
+- Tool on (command to switch the actual tool on)
+- Tool off (command to switch the actual tool off)
+
+These setting can be influenced by a GCode flavor configuration file. The default settings
+are good for 
 
 ```
 gcode
@@ -65,9 +74,11 @@ gcode
 }
 ```
 
+and can be set by the by the `--flavor` or `-f` command line option.
+
 A new configuration file can be set by the `--flavor` or `-f` command line option.
 
-Another configurable property is the resolution of the SVG image in DPI (dot per inch). It can be given by the `--dpi` or `-d` command line option. Default value is 72 DPI.
+
 
 ## Limitations
 
