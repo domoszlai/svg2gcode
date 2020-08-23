@@ -53,32 +53,32 @@ $ juicy-gcode SVGFILE --generate-bezier
 
 ## Configuration
 
-The generated GCode is highly dependent on the actual device it wil be executed by. In juicy-gcode, these settings are called
+The generated GCode is highly dependent on the actual device it will be executed by. In juicy-gcode these settings are called
 GCode flavour and consists of the following:
 
 - Begin GCode routine (commands that are executed *before* the actual print job)
 - End GCode routine (commands that are executed *after* the actual print job)
-- Tool on (command to switch the actual tool on)
-- Tool off (command to switch the actual tool off)
+- Tool on (commands to switch the tool on, e.g. lower pen)
+- Tool off (commands to switch the tool off e.g. lift pen)
 
-These setting can be influenced by a GCode flavor configuration file. The default settings
-are good for 
+These settings can be provided by a configuration file. The default settings
+are made for being able to test the generated GCode in an emulator e.g. with [LaserWeb](https://laserweb.yurl.ch/). 
 
 ```
 gcode
 {
-   begin = "G17;G90;G0 Z10;G0 X0 Y0;M3;G4 P2000.000000"
-   end = "G0 Z10;M5;M2"
-   toolon =  "G00 Z10"
+   begin = "G17;G90;G0 Z1;G0 X0 Y0"
+   end = "G0 Z1"
+   toolon =  "G00 Z1"
    tooloff = "G01 Z0 F10.00"
 }
 ```
 
-and can be set by the by the `--flavor` or `-f` command line option.
+And the command would be
 
-A new configuration file can be set by the `--flavor` or `-f` command line option.
-
-
+```
+$ juicy-gcode SVGFILE -f FLAVORFILE
+```
 
 ## Limitations
 
