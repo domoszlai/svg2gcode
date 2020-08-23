@@ -75,7 +75,7 @@ gcode
 }
 ```
 
-In the case you want to overwrite it, copy this favor to a text file and modify it accordign to your need. Then use juicy-gcode as follows:
+In the case you want to overwrite it, copy this favor to a text file and modify it according to your need. Then use juicy-gcode as follows:
 
 ```
 $ juicy-gcode SVGFILE -f FLAVORFILE
