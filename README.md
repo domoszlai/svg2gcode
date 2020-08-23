@@ -54,7 +54,7 @@ $ juicy-gcode SVGFILE --generate-bezier
 ## Configuration
 
 The generated GCode is highly dependent on the actual device it will be executed by. In juicy-gcode these settings are called
-GCode flavour and consists of the following:
+GCode *flavor* and consists of the following:
 
 - Begin GCode routine (commands that are executed *before* the actual print job)
 - End GCode routine (commands that are executed *after* the actual print job)
@@ -75,7 +75,7 @@ gcode
 }
 ```
 
-And the command would be
+The flavor file can be provided as follows
 
 ```
 $ juicy-gcode SVGFILE -f FLAVORFILE
@@ -89,7 +89,7 @@ into a tool that can drive CNCs in 2.5 dimensions (e.g. carving, engraving) with
 
 To be able to test and enjoy that software I need a proper CNC. Please consider donating for that.
 
-
+**[Donate for a CNC](https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=UGFZYDQSTF58L&source=https://github.com/domoszlai/juicy-gcode/)**
 
 ## Limitations
 
