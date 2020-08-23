@@ -6,11 +6,9 @@
 
 ## Overview
 
-Haskell SVG to G-code converter that aims to support most SVG features. The flavor of the generated G-Code can be influenced providing a configuration file.
-Juicy-gcode, in contrast to most SVG to G-Code converters, approximates bezier curves with [biarcs](http://dlacko.org/blog/2016/10/19/approximating-bezier-curves-by-biarcs/) instead of line segments
-that results in much better curve fit.
+Juicy-gcode is a configurable SVG to G-code converter that approximates bezier curves with [biarcs](http://dlacko.org/blog/2016/10/19/approximating-bezier-curves-by-biarcs/) for maximal curve fitting.
 
-## Installation and usage
+## Installation
 
 The easiest way is to download one of the pre-built binaries from the [releases page](https://github.com/domoszlai/juicy-gcode/releases).
 Alternatively, you can build from source code as follows:
@@ -21,26 +19,36 @@ Alternatively, you can build from source code as follows:
 - `$ stack install`
 - `$ juicy-gcode --help`
 
+## Usage
+
+> :warning: **Breaking change**: Since version 0.2.0.1, default DPI is changed to 96 and the option to mirror the Y axis is removed (it is always mirrored now)
+
+The easier way to use juicy-gcode is to simply provide an SVG file name. The generated GCode will be written to standard output.
+
 ```
-juicy-gcode - The SVG to G-Code converter
+$ juicy-gcode SVGFILE
+```
 
-Usage: juicy-gcode SVGFILE [-f|--flavor CONFIGFILE] [-o|--output OUTPUTFILE]
-                   [-d|--dpi DPI] [-r|--resolution RESOLUTION]
-                   [-m|--mirror-y-axis] [-b|--generate-bezier]
-  Convert SVGFILE to G-Code
+Alternativly, you can provide an output file name as well.
 
-Available options:
-  -h,--help                   Show this help text
-  SVGFILE                     The SVG file to be converted
-  -f,--flavor CONFIGFILE      Configuration of G-Code flavor
-  -o,--output OUTPUTFILE      The output G-Code file (default is standard output)
-  -d,--dpi DPI                Used to determine the size of the SVG when it does
-                              not contain any units; dot per inch (default is 72)
-  -r,--resolution RESOLUTION  Shorter paths are replaced by line segments; mm
-                              (default is 0.1)
-  -m,--mirror-y-axis          Mirror Y axis to have the result in G-Code coordinate
-                              system
-  -b,--generate-bezier        Generate bezier curves (G5) instead of arcs (G2,G3)
+```
+$ juicy-gcode SVGFILE -o OUTPUT
+```
+
+Sometimes you want to overwrite some default settings. These are the 
+
+* *--dpi* (default 96 DPI) (the resolution of the SVG file)[https://developer.mozilla.org/en-US/docs/Web/CSS/resolution] that is used to determine the size of the SVG when it does not contain explicit units
+* *--resolution* (default is 0.1 mm) the resolution of the generated GCode. Paths smaller than this are replaced by line segments instead of further approximated by biarcs
+ 
+```
+$ juicy-gcode SVGFILE --dpi 72 --resolution 0.01 
+```
+
+Some firmwares (e.g. (Marlin)[https://marlinfw.org/docs/gcode/G005.html]) can handle bezier curves explicitely. In this case
+you can command juicy-gcode not to approximate bezier-curves but emit them directly. 
+
+```
+$ juicy-gcode SVGFILE --generate-bezier
 ```
 
 ## Configuration
