@@ -62,7 +62,8 @@ GCode flavour and consists of the following:
 - Tool off (commands to switch the tool off e.g. lift pen)
 
 These settings can be provided by a configuration file. The default settings
-are made for being able to test the generated GCode in an emulator e.g. with [LaserWeb](https://laserweb.yurl.ch/). 
+are made for being able to test the generated GCode in an emulator e.g. with [LaserWeb](https://laserweb.yurl.ch/)
+or [my hanging plotter simulator](https://github.com/domoszlai/hanging-plotter-simulator). 
 
 ```
 gcode
@@ -80,6 +81,16 @@ And the command would be
 $ juicy-gcode SVGFILE -f FLAVORFILE
 ```
 
+## Future development
+
+Juicy-gcode was originally developed as a testbed for my hanging plotter project, but over the years
+it reached maturity and became a really usuable tool. My main idea for further development is to turn it
+into a tool that can drive CNCs in 2.5 dimensions (e.g. carving, engraving) with just one colored SVG file. 
+
+To be able to test and enjoy that software I need a proper CNC. Please consider donating for that.
+
+
+
 ## Limitations
 
 SVG features that are not supported:
@@ -88,8 +99,3 @@ SVG features that are not supported:
 - filling
 - clipping
 - images
-
-## Testing and bugs
-
-There is a JavaScript [hanging plotter simulator](https://github.com/domoszlai/hanging-plotter-simulator) mainly developed to test the generated gcode.
-Please file an issue if you run into a problem (or drop me an email to dlacko @ gmail.com).
