@@ -92,6 +92,9 @@ or donate an actual CNC if you have a spare one for whatever reason.
 
 **[Donate for a CNC](https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=UGFZYDQSTF58L&source=https://github.com/domoszlai/juicy-gcode/)**
 
+Collected so far: 2.47&euro;
+Target: > 200&euro;
+
 ## Limitations
 
 SVG features that are not supported:
